@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@project-serum/serum": "^0.13.59",
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "^1.25.0",
+    "axios": "^0.21.4",
+    "bignumber.js": "^9.0.1",
+    "bip32": "^2.0.6",
+    "bip39": "^3.0.4",
+    "ed25519-hd-key": "^1.2.0"
+  },
+  "name": "swallet",
+  "version": "1.0.0",
+  "main": "wallet.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kun-g/swallet.git"
+  },
+  "author": "Kun.G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kun-g/swallet/issues"
+  },
+  "homepage": "https://github.com/kun-g/swallet#readme",
+  "description": ""
+}
