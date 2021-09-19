@@ -72,8 +72,8 @@ class Wallet {
         return this.tokenAccounts
     }
 
-    getTokenAccount = async function (mintAddress) {
-        for (let a of await this.getTokenAccounts()) {
+    getTokenAccount = async function (mintAddress, force=false) {
+        for (let a of await this.getTokenAccounts(force)) {
             if (a.mint == mintAddress) {
                 return a
             }
