@@ -36,6 +36,8 @@ class Wallet {
     setAccountIndex (index) {
         this.accountIndex = index
         this.keypair = getAccountFromSeed(this._seed, this.accountIndex)
+        this.publicKey = this.keypair.publicKey
+        this.privateKey = this.keypair.privateKey
     }
 
     nextAccount () {
@@ -45,14 +47,6 @@ class Wallet {
 
     get seed () {
         return Buffer.from(this._seed).toString('hex')
-    }
-
-    get publicKey () {
-        return this.keypair.publicKey
-    }
-
-    get privateKey () {
-        return this.keypair.privateKey
     }
 
     get address () {
