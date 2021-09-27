@@ -1,5 +1,5 @@
 const { pbkdf2Sync } = require('crypto');
-const { randomBytes, secretbox } = require('tweetnacl');
+const { randomBytes, secretbox, sign, box } = require('tweetnacl');
 const bip39 = require('bip39');
 const bs58 = require('bs58');
 const { Keypair, Connection, Transaction } = require('@solana/web3.js');
@@ -37,7 +37,7 @@ class Wallet {
         this.accountIndex = index
         this.keypair = getAccountFromSeed(this._seed, this.accountIndex)
         this.publicKey = this.keypair.publicKey
-        this.privateKey = this.keypair.privateKey
+        this.privateKey = this.keypair.secretKey
     }
 
     nextAccount () {
@@ -84,11 +84,22 @@ class Wallet {
     signTransaction = async (transaction) => {
         transaction.partialSign(this.keypair);
         return transaction;
-    };
+    }
 
-    // TODO 签名 & 验签
+    signMessage (message) {
+        return sign(Buffer.from(message), this.keypair.secretKey)
+    }
+
+    openSignedMessage (message) {
+        return Buffer.from(sign.open(message, this.keypair._keypair.publicKey))
+    }
+
     createSignature (message) {
-        return bs58.encode(nacl.sign.detached(message, this.privateKey));
+        return sign.detached(Buffer.from(message), this.keypair.secretKey)
+    }
+
+    verifySignature (signature, message) {
+        return sign.detached.verify(Buffer.from(message), signature, this.keypair._keypair.publicKey)
     };
 
     save (path, password) {
