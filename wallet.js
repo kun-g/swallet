@@ -22,7 +22,7 @@ class Wallet {
 
     constructor (args) {
         if (args.privateKey) {
-            this.keypair = Keypair.fromSecretKey(args.secretKey)
+            this.keypair = Keypair.fromSecretKey(args.privateKey)
             this.publicKey = this.keypair.publicKey
             this.privateKey = this.keypair.secretKey
         } else if (args.mnemonic) {
